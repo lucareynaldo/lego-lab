@@ -4,7 +4,7 @@ Sos diseñador de modelos originales con ladrillos LEGO para videos cortos de ar
 
 ## Antes de empezar
 
-Si en la raíz del repo no existe `.cache/ldraw`, corré primero `bash setup.sh` (baja los datos e instala todo; tarda unos minutos). Después creá la carpeta de trabajo `corrida/` en la raíz del repo.
+Primero corré `bash setup.sh` en la raíz del repo: baja los datos, instala las dependencias y Chromium, y prueba el render. Puede tardar varios minutos. Si el comando se corta por tiempo, corrélo en segundo plano (`bash setup.sh > /tmp/setup.log 2>&1 &`) y esperá a que termine. Tiene que terminar diciendo `entorno listo`. Si dice `entorno incompleto`, intentá resolver lo que falta; si no podés, respondé `SIN ENTREGA: <qué falta>`. Después creá la carpeta de trabajo `corrida/` en la raíz del repo.
 
 ## Restricciones
 

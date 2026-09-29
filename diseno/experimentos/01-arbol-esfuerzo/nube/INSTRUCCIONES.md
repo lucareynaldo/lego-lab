@@ -23,9 +23,9 @@ Creá un entorno nuevo, por ejemplo **lego-lab-diseno**:
   archive.ubuntu.com
   security.ubuntu.com
   ```
-- **Setup script:**
+- **Setup script:** dejalo **vacío**. El script del entorno corre fuera de la carpeta del repo y no encuentra `setup.sh`; la preparación la hace el agente al empezar, como indica la consigna.
   ```sh
-  bash setup.sh
+  (dejalo vacío)
   ```
   El script está en la raíz del repo: baja los datos, instala dependencias y Chromium, y arma el índice de piezas. Si tarda más de lo que el entorno permite, no importa: la consigna le indica al agente que lo corra él mismo si falta `.cache/ldraw`.
 
