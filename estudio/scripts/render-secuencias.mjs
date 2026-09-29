@@ -14,7 +14,8 @@ import {fileURLToPath} from 'node:url';
 
 const aqui = dirname(fileURLToPath(import.meta.url));
 const trabajos = JSON.parse(readFileSync(process.argv[2], 'utf8'));
-const chromiumOptions = {gl: 'angle'};
+// En Windows, ANGLE usa la GPU; en Linux sin GPU (p. ej., contenedores en la nube) hace falta SwiftShader.
+const chromiumOptions = {gl: process.env.TALLER_GL ?? (process.platform === 'win32' ? 'angle' : 'swangle')};
 const timeoutInMilliseconds = 10 * 60 * 1000;
 
 const serveUrl = await bundle({entryPoint: resolve(aqui, '../src/index.ts'), publicDir: resolve(aqui, '../public')});

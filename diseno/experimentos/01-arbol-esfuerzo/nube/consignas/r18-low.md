@@ -68,13 +68,12 @@ En `corrida/`:
   - la forma de copa según la tabla de `consigna/hechos-arbol.md`.
 - `renders/final.png`, con las vistas `34,frente,lado,34atras`.
 
-Después subí tu trabajo a una rama propia (solo la carpeta `corrida/`, nunca `.cache`):
+Después subí tu trabajo (solo la carpeta `corrida/`, nunca `.cache`) con un commit cuyo mensaje sea exactamente `corrida r18`, y hacé push de la rama en la que estés trabajando (si el entorno te asignó una rama, usá esa):
 
 ```sh
-git checkout -b corrida/r18
 git add corrida
 git commit -m "corrida r18"
-git push origin corrida/r18
+git push -u origin HEAD
 ```
 
 Cuando termines, respondé solo con: `ENTREGADO` o `SIN ENTREGA: <motivo>`.

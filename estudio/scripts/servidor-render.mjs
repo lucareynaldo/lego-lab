@@ -24,7 +24,8 @@ const DIR_SRC = resolve(aqui, '../src');
 const DIR_PUBLIC = resolve(aqui, '../public');
 const DIR_BUNDLE = resolve(process.env.TALLER_BUNDLE_DIR ?? join(RAIZ, '.cache/taller/bundle'));
 const puerto = Number(process.env.TALLER_RENDER_PUERTO ?? 7654);
-const chromiumOptions = {gl: 'angle'};
+// En Windows, ANGLE usa la GPU; en Linux sin GPU (p. ej., contenedores en la nube) hace falta SwiftShader.
+const chromiumOptions = {gl: process.env.TALLER_GL ?? (process.platform === 'win32' ? 'angle' : 'swangle')};
 const timeoutInMilliseconds = 10 * 60 * 1000;
 // Solo se escribe (y se borra) `salida` dentro de estas carpetas.
 const SALIDAS_PERMITIDAS = [resolve(tmpdir()), join(RAIZ, '.cache')];
