@@ -1,6 +1,6 @@
 # Spec: taller de diseño
 
-> 2026-09-29. Estado: **implementado** (v1, 2026-09-30). Las razones de cada herramienta están en [investigaciones/02](../investigaciones/02-diseno-de-modelos.md). El plan de implementación es [plan-taller.md](plan-taller.md).
+> 2026-09-29. Estado: **implementado** (v1, 2026-09-29). Las razones de cada herramienta están en [investigaciones/02](../investigaciones/02-diseno-de-modelos.md). El plan de implementación es [plan-taller.md](plan-taller.md).
 
 ## Para qué
 
@@ -134,7 +134,7 @@ m.guardar('arbol.mpd');                            // escribe .mpd y .mapa.json
 
 | Qué | Por qué no | Cuándo |
 |---|---|---|
-| Servidor de render persistente | Cada `render` pagaba el arranque (~10–20 s) | adelantado: implementado el 2026-09-30 (el render era cuello de botella: 34 s → 3–5 s) |
+| Servidor de render persistente | Cada `render` pagaba el arranque (~10–20 s) | adelantado: implementado el 2026-09-29 (el render era cuello de botella: 34 s → 3–5 s) |
 | Métrica de visibilidad por paso (Agrawala) | Necesita un buffer de ids por pieza; es más trabajo | Después del piloto |
 | Encastre de clips y bisagras | Tienen geometría de conexión distinta; se cubren con `en`/`rot` | v2 |
 | Mapeo completo de ids LDraw ↔ Rebrickable | Necesita la API; las piezas comunes coinciden en 90 % | Cuando se haga la lista de compras |

@@ -1,0 +1,22 @@
+{
+	"name": "taller",
+	"private": true,
+	"version": "0.1.0",
+	"description": "Herramientas para diseñar modelos LDraw: catálogo, encastre, construcción, render, validación y métricas",
+	"type": "module",
+	"scripts": {
+		"taller": "node --no-warnings src/cli.ts",
+		"servidor-render": "node ../estudio/scripts/servidor-render.mjs",
+		"tipos": "tsc -p .",
+		"test": "node --no-warnings --test \"pruebas/*.test.ts\"",
+		"test:render": "node --no-warnings --test \"pruebas/render/*.test.ts\""
+	},
+	"dependencies": {
+		"pngjs": "7.0.0"
+	},
+	"devDependencies": {
+		"@types/node": "24.5.2",
+		"@types/pngjs": "6.0.5",
+		"typescript": "7.0.2"
+	}
+}

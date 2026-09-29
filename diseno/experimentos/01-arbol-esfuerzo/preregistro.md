@@ -102,7 +102,7 @@ claude -p --model claude-opus-5-5 --effort <nivel> \
 ## Decisiones (tomadas por el equipo el 2026-09-29)
 
 1. **Cantidad de corridas: 25** (5 por nivel).
-2. **Presupuesto:** los tokens no son una restricción. Queda ~80 % del límite semanal del plan Max, que vence el 2026-09-30, más USD 250 de crédito de cómputo.
+2. **Presupuesto:** los tokens no son una restricción. Queda ~80 % del límite semanal del plan Max, que vence el 2026-09-29, más USD 250 de crédito de cómputo.
    - **La restricción real es el tiempo:** las 25 corridas tienen que terminar antes de que venza el plan.
    - El tope por corrida (`--max-budget-usd`) es igual para todas y generoso: 3× lo que gaste la corrida de calibración. Sirve solo para cortar corridas desbocadas.
    - **Concurrencia:** 2–3 corridas a la vez. La laptop tiene 7,8 GB y cada render levanta un Chromium. El orden aleatorio se respeta al elegir qué corrida arranca cuando se libera un lugar.
@@ -118,21 +118,48 @@ claude -p --model claude-opus-5-5 --effort <nivel> \
 
 ## Congelamiento
 
-- **Fecha:** 2026-09-30, 03:10 (antes de la corrida de calibración y de cualquier corrida del plan).
+- **Fecha:** 2026-09-29, 03:10 (antes de la corrida de calibración y de cualquier corrida del plan).
 - **Semilla:** `20260929`. Anonimización: `20260929 + 1`.
 - **Taller y corredor:** commit `fbc7c4f` del git sombra (ver Desvíos 1). La huella SHA-256 de este archivo queda anotada en el commit que lo congela.
 - **Concurrencia prevista:** 2–3 corridas a la vez, según la memoria libre.
 
 ## Desvíos
 
-1. **2026-09-30. El congelamiento no se hizo con un commit en el repo real.** El repo no tenía ningún commit, y otra sesión esperaba el OK de la usuaria para hacer el primero. Se usó un git sombra (otro GIT_DIR con el repo como árbol de trabajo) y se anotó la huella SHA-256 del preregistro. Cuando haya un primer commit real, este archivo tiene que entrar sin cambios respecto de esa huella, salvo esta sección de desvíos.
-2. **2026-09-30. Se agregó un servidor de render persistente** (`estudio/scripts/servidor-render.mjs`): un render pasó de 34 s a 3–9 s, y la memoria no alcanzaba para varias corridas en paralelo. No cambia qué ve el agente, solo cuánto tarda.
-3. **2026-09-30. Auditoría en dos niveles.**
+1. **2026-09-29. El congelamiento no se hizo con un commit en el repo real.** El repo no tenía ningún commit, y otra sesión esperaba el OK de la usuaria para hacer el primero. Se usó un git sombra (otro GIT_DIR con el repo como árbol de trabajo) y se anotó la huella SHA-256 del preregistro. Cuando haya un primer commit real, este archivo tiene que entrar sin cambios respecto de esa huella, salvo esta sección de desvíos.
+2. **2026-09-29. Se agregó un servidor de render persistente** (`estudio/scripts/servidor-render.mjs`): un render pasó de 34 s a 3–9 s, y la memoria no alcanzaba para varias corridas en paralelo. No cambia qué ve el agente, solo cuánto tarda.
+3. **2026-09-29. Auditoría en dos niveles.**
    - `contaminada` solo marca pistas prohibidas: referencias, OMR, sets de prueba, modelos LDraw de ejemplo, otras corridas, `diseno/`, `investigaciones/` y árboles ajenos.
    - Las demás rutas fuera de lugar van a revisión manual (`rutasFuera`).
    - Se decidió antes de correr, para evitar falsos positivos.
    - También cuenta como contaminación leer el **contenido** de `taller/src/experimento/` o `taller/pruebas/experimento/`, donde están la rúbrica del juez y el análisis. Listar la carpeta no cuenta. Se agregó después de ver, en la corrida de calibración, que el agente explora el código del taller.
-4. **2026-09-30. Tope y arranque.**
+4. **2026-09-29. Tope y arranque.**
    - El lote principal usa un tope fijo de USD 50 por corrida, en vez de 3× el costo de la calibración. Los tokens no son una restricción y el tiempo sí.
    - El lote arranca cuando la calibración ya mostró que el agente usa el taller sin errores, sin esperar a que termine.
    - El código del taller que usan los diseñadores queda congelado desde el arranque del lote: commit `e15aeed` del git sombra (03:28). Incluye el arreglo de los anti-studs de sección cuadrada (piezas 1×N), un bug que encontró la corrida de calibración.
+5. **2026-09-29, 12:55. Corrección de fechas.**
+   - Las fechas de esta sección y del congelamiento decían 2026-09-30 por un error del agente: todo pasó la madrugada del 29.
+   - Solo cambiaron las fechas. La huella SHA-256 anotada en el congelamiento corresponde a la versión anterior a esta corrección.
+6. **2026-09-29. Corte nocturno y relanzamiento.**
+   - A las 03:46 Claude Code mató el lanzador por falta de RAM. Estaban hechas r02 y la calibración (esta, detenida a mano). r01, r03 y r04 quedaron cortadas sin resultado y se repitieron desde cero como falla de infraestructura.
+   - El lote se relanzó a las 12:55, con el mismo código congelado, desde una terminal de la usuaria.
+   - Un agente no puede ver corridas anteriores de su mismo id: la carpeta de trabajo se limpia antes de cada corrida.
+7. **2026-09-29, ~13:20. Corte por la herramienta, no por el agente.**
+   - En modo `claude -p`, cuando un comando tarda (por ejemplo, un render en cola), Claude Code lo pasa solo a segundo plano. Si el agente termina su turno esperándolo, la sesión se cierra y la tarea muere.
+   - Así terminó r02, sin `ENTREGADO`. Es un artefacto de la herramienta, no una decisión del diseñador, y sesga la comparación entre niveles.
+   - Ruling: se clasifica como falla de infraestructura. El lote se detuvo y se relanza desde cero con `CLAUDE_CODE_DISABLE_BACKGROUND_TASKS=1`, `BASH_DEFAULT_TIMEOUT_MS=600000` y `BASH_MAX_TIMEOUT_MS=1200000`, la misma condición para las 25 corridas. r02 se repite; su intento anterior queda en `corridas/r02-intento-cortado/` y no entra en el análisis.
+   - La prueba de selección del juez se pausa hasta que terminen los diseños, para no competir por la cola de render. Tiene caché y se retoma.
+   - Hasta este momento solo se había visto r02, y todavía no hubo ningún juicio.
+8. **2026-09-29, ~13:30. Arreglos del análisis antes del lote definitivo** (commit `fcf52f2` del git sombra). Solo tocan los scripts de auditoría, juicio y análisis; el código de los diseñadores no cambió. Todos se decidieron después de ver únicamente la corrida r02, antes de cualquier juicio.
+   - El uso de herramientas se cuenta también cuando el agente usa alias del CLI. Sigue sin contarse lo que pasa por scripts auxiliares o funciones de shell.
+   - En las corridas sin línea de resultado, el costo, los tokens y la duración se estiman a partir de los mensajes del transcript y quedan marcados como estimados.
+   - Los ids anónimos son estables: nunca se reasignan, y si cambia un modelo se invalida su caché.
+   - En el Bradley–Terry **humano**, los modelos no entregados quedan afuera y se informan aparte por nivel. En el del juez VLM se mantiene que pierden todo, como dice el preregistro.
+   - Consistencia del juez: es la fracción de pares en que los dos órdenes coinciden en `general`. El doble empate cuenta como inconsistente.
+   - Se marca `terminoMal` cuando la respuesta final no es `ENTREGADO` ni `SIN ENTREGA`.
+   - Contaminación: también cuenta leer modelos ajenos del caché de render. Las carpetas de sesiones viejas de Claude van a revisión manual.
+9. **2026-09-29, 14:30. Servidor de render colgado.**
+   - Desde el corte nocturno quedaron dos procesos del servidor. El chequeo de salud respondía, pero los renders se colgaban.
+   - El cliente no tiene tope de espera, así que las corridas relanzadas a las 13:58 (r01, r02, r03) perdieron hasta 20 minutos por comando.
+   - Se clasifica como falla de infraestructura: se detuvieron, se mataron los dos servidores y se levantó uno solo, verificado con renders de punta a punta.
+   - El lote se relanza desde cero. Ninguna de esas corridas había guardado salida.
+   - Desde ahora un monitor prueba un render real cada 3 minutos.
