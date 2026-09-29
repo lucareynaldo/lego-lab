@@ -1,0 +1,14 @@
+{
+  "name": "manual",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Genera manuales de instrucciones estilo LEGO (PDF) a partir de un modelo LDraw",
+  "type": "module",
+  "scripts": {
+    "tipos": "tsc -p ."
+  },
+  "devDependencies": {
+    "@types/node": "24.5.2",
+    "typescript": "7.0.2"
+  }
+}

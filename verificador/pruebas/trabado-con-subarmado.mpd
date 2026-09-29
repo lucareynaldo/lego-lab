@@ -1,0 +1,30 @@
+0 FILE trabado-con-subarmado.ldr
+0 Trabado con sub-armado: el mismo modelo que trabado.ldr, con el par de arriba armado aparte
+0 Name: trabado-con-subarmado.ldr
+0 Author: lego-lab
+0 // El par de arriba (dos ladrillos con agujero y el pin) se arma aparte y baja entero sobre los 1x2.
+0 // Así sí se arma: no tiene que dar errores.
+1 71 0 0 0 1 0 0 0 1 0 0 0 1 3700.dat
+0 STEP
+1 0 0 10 10 0 0 1 0 1 0 -1 0 0 3673.dat
+0 STEP
+1 71 0 0 20 1 0 0 0 1 0 0 0 1 3700.dat
+0 STEP
+1 4 0 -24 0 1 0 0 0 1 0 0 0 1 3004.dat
+1 4 0 -24 20 1 0 0 0 1 0 0 0 1 3004.dat
+0 STEP
+1 16 0 -48 0 1 0 0 0 1 0 0 0 1 tapa.ldr
+0 STEP
+0 NOFILE
+
+0 FILE tapa.ldr
+0 Tapa
+0 Name: tapa.ldr
+0 Author: lego-lab
+1 71 0 0 0 1 0 0 0 1 0 0 0 1 3700.dat
+0 STEP
+1 0 0 10 10 0 0 1 0 1 0 -1 0 0 3673.dat
+0 STEP
+1 71 0 0 20 1 0 0 0 1 0 0 0 1 3700.dat
+0 STEP
+0 NOFILE

@@ -1,0 +1,12 @@
+0 Voladizo en orden correcto: el ladrillo C va antes que la placa de arriba
+0 Name: voladizo-bien.ldr
+0 Author: lego-lab (prueba sintética)
+0 !LDRAW_ORG Model
+1 4 0 0 0 1 0 0 0 1 0 0 0 1 3020.dat
+0 STEP
+1 14 -20 -24 -10 1 0 0 0 1 0 0 0 1 3004.dat
+1 14 -20 -24 10 1 0 0 0 1 0 0 0 1 3004.dat
+1 2 20 -24 -10 1 0 0 0 1 0 0 0 1 3004.dat
+0 STEP
+1 1 0 -32 0 1 0 0 0 1 0 0 0 1 3020.dat
+0 STEP

@@ -1,0 +1,19 @@
+{
+  "name": "verificador",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Verifica que un modelo LDraw se pueda armar: piezas reales, conexiones, pasos, colisiones y estabilidad",
+  "type": "module",
+  "scripts": {
+    "verificar": "node --no-warnings src/cli.ts",
+    "tipos": "tsc -p .",
+    "test": "node --no-warnings pruebas/unitarias.ts && node --no-warnings pruebas/modelos.ts"
+  },
+  "devDependencies": {
+    "@types/node": "24.5.2",
+    "typescript": "7.0.2"
+  },
+  "dependencies": {
+    "quickhull3d": "3.1.2"
+  }
+}

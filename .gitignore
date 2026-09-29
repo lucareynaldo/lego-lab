@@ -1,0 +1,11 @@
+node_modules/
+.venv*/
+# Biblioteca de piezas LDraw (145 MB): se descarga con el comando de estudio/README.md
+.cache/
+# Generados
+estudio/salida/
+estudio/public/modelos/
+*.mp4
+estudio/public/taller/
+# Modelos empaquetados que genera el manual (derivados de los sets; se regeneran)
+estudio/public/manual/

@@ -1,0 +1,11 @@
+0 Apoyado: un ladrillo apoyado sobre una baldosa lisa, sin nada donde encastrar
+0 Name: apoyado.ldr
+0 Author: lego-lab
+0 // No está en el aire (lo sostiene su peso): no tiene que dar flotante ni flota. Sí el aviso
+0 // apoyado-sin-conexion, porque al levantar el modelo se cae.
+1 71 0 0 0 1 0 0 0 1 0 0 0 1 3020.dat
+0 STEP
+1 15 -20 -8 0 1 0 0 0 1 0 0 0 1 3068b.dat
+0 STEP
+1 4 -20 -32 0 1 0 0 0 1 0 0 0 1 3003.dat
+0 STEP
