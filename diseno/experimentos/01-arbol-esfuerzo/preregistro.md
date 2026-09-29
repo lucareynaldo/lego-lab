@@ -163,3 +163,9 @@ claude -p --model claude-opus-5-5 --effort <nivel> \
    - Se clasifica como falla de infraestructura: se detuvieron, se mataron los dos servidores y se levantó uno solo, verificado con renders de punta a punta.
    - El lote se relanza desde cero. Ninguna de esas corridas había guardado salida.
    - Desde ahora un monitor prueba un render real cada 3 minutos.
+10. **2026-09-29, ~15:30. Las corridas pasan a la nube.**
+    - La laptop no sostiene las corridas locales por falta de RAM, por el control de memoria de Claude Code y por un servidor de render colgado. Cada corrida pasa a ser una sesión de Claude Code en la nube (claude.ai/code), con modelo Opus 5.5 y el esfuerzo de la tabla, lanzada por la usuaria.
+    - Los diseñadores trabajan sobre un repo aparte (`lego-lab-disenadores`, un solo commit): solo taller, verificador y estudio, más `consigna/hechos-arbol.md` y `setup.sh`. No tiene documentos del experimento, código del juez ni sets oficiales.
+    - La consigna es la misma con rutas adaptadas (`nube/consigna-nube.md`): se trabaja en `corrida/` y se entrega por push a la rama `corrida/<id>`.
+    - **Se pierde:** los transcripts quedan en la nube. No hay medición automática de tokens, costo ni uso de herramientas (H3 y H4 quedan sin evaluar salvo anotación manual), ni auditoría de lecturas.
+    - Se mantienen la validez, las métricas del modelo, las piezas prohibidas, el juicio VLM y el juicio humano.
